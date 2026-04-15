@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Eye, EyeOff, ChevronDown, Settings2, Key, Cpu } from 'lucide-react';
+import { Eye, EyeOff, ChevronDown, Settings2, Key, Cpu, CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 
 const MODELS = [
   {
@@ -96,6 +96,8 @@ export default function Sidebar({
 }: SidebarProps) {
   const [showKey, setShowKey] = useState(false);
   const [configOpen, setConfigOpen] = useState(true);
+  const [connectStatus, setConnectStatus] = useState<'idle' | 'connecting' | 'connected' | 'failed'>('idle');
+  const [connectMessage, setConnectMessage] = useState('');
 
   const selectedModel = MODELS.find((m) => m.id === model) || MODELS[0];
 
@@ -104,6 +106,32 @@ export default function Sidebar({
     const m = MODELS.find((x) => x.id === newModel);
     if (m) onModelNameChange(m.variants[0].value);
     onApiKeyChange(''); // Clear key on model switch
+    setConnectStatus('idle');
+    setConnectMessage('');
+  };
+
+  const handleConnect = async () => {
+    if (!apiKey.trim()) return;
+    setConnectStatus('connecting');
+    setConnectMessage('');
+    try {
+      const res = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model, apiKey, modelName }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setConnectStatus('connected');
+        setConnectMessage(data.message || 'Connected successfully');
+      } else {
+        setConnectStatus('failed');
+        setConnectMessage(data.error || 'Connection failed');
+      }
+    } catch {
+      setConnectStatus('failed');
+      setConnectMessage('Network error — could not reach server');
+    }
   };
 
   return (
@@ -158,7 +186,7 @@ export default function Sidebar({
             <input
               type={showKey ? 'text' : 'password'}
               value={apiKey}
-              onChange={(e) => onApiKeyChange(e.target.value)}
+              onChange={(e) => { onApiKeyChange(e.target.value); setConnectStatus('idle'); setConnectMessage(''); }}
               placeholder={selectedModel.apiKeyPlaceholder}
               className="field-input api-key-input"
               autoComplete="off"
@@ -179,6 +207,33 @@ export default function Sidebar({
           >
             Get {selectedModel.label} API key →
           </a>
+
+          {/* Connect button */}
+          <button
+            onClick={handleConnect}
+            disabled={!apiKey.trim() || connectStatus === 'connecting'}
+            className={`btn-connect ${
+              connectStatus === 'connected' ? 'btn-connect--ok' :
+              connectStatus === 'failed' ? 'btn-connect--fail' : ''
+            }`}
+          >
+            {connectStatus === 'connecting' && <Loader2 size={13} className="spin" />}
+            {connectStatus === 'connected' && <CheckCircle2 size={13} />}
+            {connectStatus === 'failed' && <XCircle size={13} />}
+            {connectStatus === 'connecting' ? 'Connecting…' :
+             connectStatus === 'connected' ? 'Connected' :
+             connectStatus === 'failed' ? 'Retry Connect' : 'Connect'}
+          </button>
+
+          {/* Status message */}
+          {connectMessage && (
+            <p className={`connect-msg ${
+              connectStatus === 'connected' ? 'connect-msg--ok' : 'connect-msg--fail'
+            }`}>
+              {connectMessage}
+            </p>
+          )}
+
           <p className="key-note">🔒 Stored in memory only, never saved</p>
         </div>
       </div>

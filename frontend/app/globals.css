@@ -449,6 +449,78 @@ body {
   color: var(--overlay0);
 }
 
+/* Connect button */
+.btn-connect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface0);
+  color: var(--subtext1);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.3px;
+}
+.btn-connect:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: rgba(137,180,250,0.07);
+}
+.btn-connect:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-connect--ok {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(166,227,161,0.08);
+}
+.btn-connect--ok:hover:not(:disabled) {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(166,227,161,0.12);
+}
+.btn-connect--fail {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(243,139,168,0.08);
+}
+.btn-connect--fail:hover:not(:disabled) {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(243,139,168,0.12);
+}
+
+/* Connect status message */
+.connect-msg {
+  margin-top: 6px;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+.connect-msg--ok {
+  color: var(--green);
+  background: rgba(166,227,161,0.08);
+}
+.connect-msg--fail {
+  color: var(--red);
+  background: rgba(243,139,168,0.08);
+}
+
+/* Spin animation for connecting loader */
+.spin {
+  animation: spin 0.7s linear infinite;
+}
+
 /* Slider */
 .slider-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .slider-value {
