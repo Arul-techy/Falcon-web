@@ -11,7 +11,6 @@ export async function generateWithGemini({ apiKey, prompt, config, modelName }: 
     generationConfig: {
       temperature: config?.temperature ?? 0.7,
       maxOutputTokens: config?.maxTokens ?? 4096,
-      responseMimeType: 'application/json',
     },
   });
 
