@@ -5,7 +5,7 @@ export async function generateWithGroq({ apiKey, prompt, config, modelName }: {
   apiKey: string; prompt: string; config?: { temperature?: number; maxTokens?: number }; modelName?: string;
 }) {
   const client = new Groq({ apiKey });
-  const model = modelName || 'llama-3.3-70b-versatile';
+  const model = modelName || 'meta-llama/llama-4-scout-17b-16e-instruct';
   const temperature = config?.temperature ?? 0.7;
   const maxTokens = config?.maxTokens ?? 4096;
 

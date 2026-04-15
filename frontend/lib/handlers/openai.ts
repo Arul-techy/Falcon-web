@@ -5,7 +5,7 @@ export async function generateWithOpenAI({ apiKey, prompt, config, modelName }: 
   apiKey: string; prompt: string; config?: { temperature?: number; maxTokens?: number }; modelName?: string;
 }) {
   const client = new OpenAI({ apiKey });
-  const model = modelName || 'gpt-4o';
+  const model = modelName || 'gpt-5.4';
   const temperature = config?.temperature ?? 0.7;
   const maxTokens = config?.maxTokens ?? 4096;
 

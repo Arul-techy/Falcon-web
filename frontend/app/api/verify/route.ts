@@ -18,45 +18,45 @@ export async function POST(request: NextRequest) {
         const client = new OpenAI({ apiKey });
         // Minimal completion to verify key + model
         await client.chat.completions.create({
-          model: modelName || 'gpt-4o',
+          model: modelName || 'gpt-5.4',
           messages: [{ role: 'user', content: 'hi' }],
           max_tokens: 1,
         });
-        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'gpt-4o'}` });
+        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'gpt-5.4'}` });
       }
 
       case 'gemini': {
         const genAI = new GoogleGenerativeAI(apiKey);
-        const geminiModel = genAI.getGenerativeModel({ model: modelName || 'gemini-2.0-flash' });
+        const geminiModel = genAI.getGenerativeModel({ model: modelName || 'gemini-2.5-flash' });
         await geminiModel.generateContent({ contents: [{ role: 'user', parts: [{ text: 'hi' }] }], generationConfig: { maxOutputTokens: 1 } });
-        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'gemini-2.0-flash'}` });
+        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'gemini-2.5-flash'}` });
       }
 
       case 'claude': {
         const client = new Anthropic({ apiKey });
         await client.messages.create({
-          model: modelName || 'claude-3-7-sonnet-20250219',
+          model: modelName || 'claude-sonnet-4-6',
           max_tokens: 1,
           messages: [{ role: 'user', content: 'hi' }],
         });
-        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'claude-3-7-sonnet-20250219'}` });
+        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'claude-sonnet-4-6'}` });
       }
 
       case 'groq': {
         const client = new Groq({ apiKey });
         await client.chat.completions.create({
-          model: modelName || 'llama-3.3-70b-versatile',
+          model: modelName || 'meta-llama/llama-4-scout-17b-16e-instruct',
           messages: [{ role: 'user', content: 'hi' }],
           max_tokens: 1,
         });
-        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'llama-3.3-70b-versatile'}` });
+        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'meta-llama/llama-4-scout-17b-16e-instruct'}` });
       }
 
       case 'openrouter': {
         await axios.post(
           'https://openrouter.ai/api/v1/chat/completions',
           {
-            model: modelName || 'openai/gpt-4o',
+            model: modelName || 'openai/gpt-5.4',
             messages: [{ role: 'user', content: 'hi' }],
             max_tokens: 1,
           },
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
             },
           }
         );
-        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'openai/gpt-4o'}` });
+        return NextResponse.json({ ok: true, message: `Connected to ${modelName || 'openai/gpt-5.4'}` });
       }
 
       default:
