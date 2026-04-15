@@ -1,0 +1,24 @@
+{
+  "name": "falcon-web-builder-api",
+  "version": "1.0.0",
+  "description": "Falcon Web-Builder Backend API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.89.0",
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.15.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.0",
+    "groq-sdk": "^1.1.2",
+    "openai": "^4.73.0"
+  }
+}

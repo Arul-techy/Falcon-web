@@ -1,0 +1,39 @@
+{
+  "name": "falcon-web-builder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.89.0",
+    "@google/generative-ai": "^0.24.1",
+    "@monaco-editor/react": "^4.6.0",
+    "axios": "^1.15.0",
+    "file-saver": "^2.0.5",
+    "firebase": "^10.14.0",
+    "groq-sdk": "^1.1.2",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.454.0",
+    "next": "14.2.29",
+    "openai": "^4.104.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hot-toast": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.29",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}

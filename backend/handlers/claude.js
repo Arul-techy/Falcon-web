@@ -1,0 +1,28 @@
+const Anthropic = require('@anthropic-ai/sdk');
+const { buildSystemPrompt, buildUserMessage } = require('../utils/promptBuilder');
+
+/**
+ * Generate website using Anthropic Claude API
+ */
+async function generateWithClaude({ apiKey, prompt, config, modelName }) {
+  const client = new Anthropic({ apiKey });
+
+  const model = modelName || 'claude-3-5-sonnet-20241022';
+  const maxTokens = config?.maxTokens ?? 4096;
+  const temperature = config?.temperature ?? 0.7;
+
+  const response = await client.messages.create({
+    model,
+    max_tokens: maxTokens,
+    temperature,
+    system: buildSystemPrompt(),
+    messages: [{ role: 'user', content: buildUserMessage(prompt) }],
+  });
+
+  const content = response.content[0]?.text || '{}';
+  const tokensUsed = (response.usage?.input_tokens || 0) + (response.usage?.output_tokens || 0);
+
+  return { rawContent: content, tokensUsed };
+}
+
+module.exports = { generateWithClaude };
