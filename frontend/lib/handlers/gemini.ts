@@ -7,7 +7,7 @@ export async function generateWithGemini({ apiKey, prompt, config, modelName }: 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
     model: modelName || 'gemini-2.5-flash',
-    systemInstruction: buildSystemPrompt(),
+    systemInstruction: buildSystemPrompt(prompt),
     generationConfig: {
       temperature: config?.temperature ?? 0.7,
       maxOutputTokens: config?.maxTokens ?? 4096,

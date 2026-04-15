@@ -4,7 +4,7 @@ import { buildSystemPrompt, buildUserMessage } from '../utils/promptBuilder';
 export async function generateWithOpenRouter({ apiKey, prompt, config, modelName }: {
   apiKey: string; prompt: string; config?: { temperature?: number; maxTokens?: number }; modelName?: string;
 }) {
-  const model = modelName || 'openai/gpt-4o';
+  const model = modelName || 'openai/gpt-5.4';
   const temperature = config?.temperature ?? 0.7;
   const maxTokens = config?.maxTokens ?? 4096;
 
@@ -13,7 +13,7 @@ export async function generateWithOpenRouter({ apiKey, prompt, config, modelName
     {
       model,
       messages: [
-        { role: 'system', content: buildSystemPrompt() },
+        { role: 'system', content: buildSystemPrompt(prompt) },
         { role: 'user', content: buildUserMessage(prompt) },
       ],
       temperature,

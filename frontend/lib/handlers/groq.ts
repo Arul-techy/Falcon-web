@@ -12,7 +12,7 @@ export async function generateWithGroq({ apiKey, prompt, config, modelName }: {
   const response = await client.chat.completions.create({
     model,
     messages: [
-      { role: 'system', content: buildSystemPrompt() },
+      { role: 'system', content: buildSystemPrompt(prompt) },
       { role: 'user', content: buildUserMessage(prompt) },
     ],
     temperature,

@@ -12,12 +12,15 @@ export async function generateWithClaude({ apiKey, prompt, config, modelName }: 
   const response = await client.messages.create({
     model,
     max_tokens: maxTokens,
+    system: buildSystemPrompt(prompt),
+    messages: [
+      { role: 'user', content: buildUserMessage(prompt) },
+    ],
     temperature,
-    system: buildSystemPrompt(),
-    messages: [{ role: 'user', content: buildUserMessage(prompt) }],
   });
 
-  const content = response.content[0]?.type === 'text' ? response.content[0].text : '{}';
+  const textBlock = response.content.find((b) => b.type === 'text');
+  const content = textBlock && 'text' in textBlock ? textBlock.text : '{}';
   const tokensUsed = (response.usage?.input_tokens || 0) + (response.usage?.output_tokens || 0);
   return { rawContent: content, tokensUsed };
 }
