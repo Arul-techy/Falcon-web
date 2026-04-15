@@ -22,9 +22,9 @@ const MODELS = [
     label: 'Google Gemini',
     icon: '✨',
     variants: [
-      { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro' },
-      { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
       { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash' },
+      { value: 'gemini-2.0-flash-lite', label: 'Gemini 2.0 Flash Lite' },
+      { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
     ],
     apiKeyPlaceholder: 'AIza...',
     apiKeyLink: 'https://aistudio.google.com/app/apikey',
@@ -34,6 +34,7 @@ const MODELS = [
     label: 'Anthropic Claude',
     icon: '🧠',
     variants: [
+      { value: 'claude-3-7-sonnet-20250219', label: 'Claude 3.7 Sonnet' },
       { value: 'claude-3-5-sonnet-20241022', label: 'Claude 3.5 Sonnet' },
       { value: 'claude-3-5-haiku-20241022', label: 'Claude 3.5 Haiku' },
       { value: 'claude-3-opus-20240229', label: 'Claude 3 Opus' },
@@ -59,7 +60,7 @@ const MODELS = [
     icon: '🔀',
     variants: [
       { value: 'openai/gpt-4o', label: 'GPT-4o (via OR)' },
-      { value: 'anthropic/claude-3.5-sonnet', label: 'Claude 3.5 (via OR)' },
+      { value: 'anthropic/claude-3.7-sonnet', label: 'Claude 3.7 (via OR)' },
       { value: 'meta-llama/llama-3.3-70b-instruct', label: 'LLaMA 3.3 70B (via OR)' },
       { value: 'google/gemini-2.0-flash-001', label: 'Gemini 2.0 Flash (via OR)' },
     ],

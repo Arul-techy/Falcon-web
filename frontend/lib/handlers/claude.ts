@@ -5,7 +5,7 @@ export async function generateWithClaude({ apiKey, prompt, config, modelName }: 
   apiKey: string; prompt: string; config?: { temperature?: number; maxTokens?: number }; modelName?: string;
 }) {
   const client = new Anthropic({ apiKey });
-  const model = modelName || 'claude-3-5-sonnet-20241022';
+  const model = modelName || 'claude-3-7-sonnet-20250219';
   const maxTokens = config?.maxTokens ?? 4096;
   const temperature = config?.temperature ?? 0.7;
 

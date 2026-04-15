@@ -6,7 +6,7 @@ export async function generateWithGemini({ apiKey, prompt, config, modelName }: 
 }) {
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: modelName || 'gemini-1.5-pro',
+    model: modelName || 'gemini-2.0-flash',
     systemInstruction: buildSystemPrompt(),
     generationConfig: {
       temperature: config?.temperature ?? 0.7,
